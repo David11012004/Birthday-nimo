@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Birthday Surprise 🎂</title>
+
+  <style>
+
+    /* ================= GENERAL ================= */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+
+      font-family: "Trebuchet MS", Arial, sans-serif;
+
+      /* PINK BACKGROUND */
+      background:
+        radial-gradient(circle at 20% 20%, #ffd1e6, transparent 25%),
+        radial-gradient(circle at 80% 80%, #ffb6d5, transparent 30%),
+        linear-gradient(135deg, #ff8fbd, #ff4f91);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+    /* ================= CARD ================= */
+
+    .card {
+      position: relative;
+      z-index: 20;
+
+      width: min(92%, 620px);
+      padding: 35px 25px;
+
+      text-align: center;
+      color: white;
+
+      background: rgba(255, 255, 255, 0.18);
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      border: 2px solid rgba(255, 255, 255, 0.35);
+
+      border-radius: 32px;
+
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+
+      animation: cardPop 0.9s cubic-bezier(.17, .67, .35, 1.4);
+    }
+
+
+    @keyframes cardPop {
+
+      from {
+        opacity: 0;
+        transform: scale(.5) rotate(-5deg);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+      }
+
+    }
+
+
+    /* ================= CAKE ================= */
+
+    .cake {
+      font-size: 75px;
+
+      cursor: pointer;
+
+      user-select: none;
+
+      animation: cakeBounce 1.4s infinite;
+
+      transition: transform .2s;
+    }
+
+
+    .cake:active {
+      transform: scale(1.3) rotate(10deg);
+    }
+
+
+    @keyframes cakeBounce {
+
+      50% {
+        transform: translateY(-12px) rotate(3deg);
+      }
+
+    }
+
+
+    /* ================= TITLE ================= */
+
+    h1 {
+
+      font-size: clamp(2.4rem, 10vw, 4.7rem);
+
+      margin: 8px 0;
+
+      text-shadow: 0 6px 15px rgba(0, 0, 0, .2);
+
+      animation: wiggle 3s infinite;
+    }
+
+
+    @keyframes wiggle {
+
+      0%,
+      90%,
+      100% {
+        transform: rotate(0);
+      }
+
+      93% {
+        transform: rotate(-3deg);
+      }
+
+      96% {
+        transform: rotate(3deg);
+      }
+
+    }
+
+
+    .name {
+
+      font-size: clamp(1.5rem, 6vw, 2.4rem);
+
+      font-weight: bold;
+
+      margin-bottom: 15px;
+    }
+
+
+    .message {
+
+      font-size: clamp(1rem, 4vw, 1.2rem);
+
+      line-height: 1.6;
+
+      min-height: 90px;
+
+      transition: .3s;
+    }
+
+
+    /* ================= BUTTONS ================= */
+
+    .buttons {
+
+      margin-top: 25px;
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      justify-content: center;
+
+      gap: 12px;
+    }
+
+
+    .btn {
+
+      min-height: 48px;
+
+      padding: 13px 20px;
+
+      border: none;
+
+      border-radius: 999px;
+
+      background: white;
+
+      color: #e84393;
+
+      font-size: 15px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      box-shadow: 0 7px 20px rgba(0, 0, 0, .18);
+
+      transition:
+        transform .2s,
+        box-shadow .2s;
+    }
+
+
+    .btn:hover {
+
+      transform: translateY(-4px) rotate(-2deg);
+
+      box-shadow: 0 12px 25px rgba(0, 0, 0, .25);
+    }
+
+
+    .btn:active {
+
+      transform: scale(.9);
+    }
+
+
+    .surprise {
+
+      background: #ffe66d;
+
+      color: #9b4d00;
+    }
+
+
+    /* ================= FALLING 🎀 ================= */
+
+    .ribbon {
+
+      position: fixed;
+
+      top: -50px;
+
+      z-index: 5;
+
+      pointer-events: none;
+
+      font-size: 30px;
+
+      animation:
+        ribbonFall var(--duration) linear infinite;
+
+      animation-delay: var(--delay);
+    }
+
+
+    @keyframes ribbonFall {
+
+      0% {
+
+        transform:
+          translateY(-50px)
+          translateX(0)
+          rotate(0deg);
+
+        opacity: 0;
+      }
+
+
+      10% {
+
+        opacity: 1;
+      }
+
+
+      25% {
+
+        transform:
+          translateY(25vh)
+          translateX(90px)
+          rotate(90deg);
+      }
+
+
+      50% {
+
+        transform:
+          translateY(50vh)
+          translateX(-100px)
+          rotate(180deg);
+      }
+
+
+      75% {
+
+        transform:
+          translateY(75vh)
+          translateX(80px)
+          rotate(270deg);
+      }
+
+
+      100% {
+
+        transform:
+          translateY(115vh)
+          translateX(-50px)
+          rotate(360deg);
+
+        opacity: 1;
+      }
+
+    }
+
+
+    /* ================= BALLOONS ================= */
+
+    .balloon {
+
+      position: fixed;
+
+      bottom: -120px;
+
+      width: 55px;
+
+      height: 70px;
+
+      border-radius: 50% 50% 45% 45%;
+
+      z-index: 4;
+
+      cursor: pointer;
+
+      box-shadow:
+        inset -8px -8px 15px rgba(0, 0, 0, .15),
+        inset 8px 8px 12px rgba(255, 255, 255, .3);
+
+      animation:
+        balloonUp var(--duration) linear forwards;
+    }
+
+
+    .balloon::after {
+
+      content: "";
+
+      position: absolute;
+
+      width: 1px;
+
+      height: 90px;
+
+      background: rgba(255, 255, 255, .7);
+
+      left: 50%;
+
+      top: 68px;
+    }
+
+
+    @keyframes balloonUp {
+
+      from {
+
+        transform:
+          translateY(0)
+          translateX(0)
+          rotate(-5deg);
+      }
+
+
+      50% {
+
+        transform:
+          translateY(-55vh)
+          translateX(40px)
+          rotate(8deg);
+      }
+
+
+      to {
+
+        transform:
+          translateY(-120vh)
+          translateX(-30px)
+          rotate(-5deg);
+      }
+
+    }
+
+
+    /* ================= CONFETTI ================= */
+
+    .confetti {
+
+      position: fixed;
+
+      top: -20px;
+
+      width: 9px;
+
+      height: 15px;
+
+      z-index: 50;
+
+      pointer-events: none;
+
+      animation:
+        confettiFall var(--duration) linear forwards;
+    }
+
+
+    @keyframes confettiFall {
+
+      to {
+
+        transform:
+          translateY(110vh)
+          rotate(900deg);
+      }
+
+    }
+
+
+    /* ================= POPUP ================= */
+
+    .popup {
+
+      position: fixed;
+
+      top: 50%;
+
+      left: 50%;
+
+      transform:
+        translate(-50%, -50%)
+        scale(0);
+
+      z-index: 100;
+
+      width: min(90%, 450px);
+
+      padding: 35px 25px;
+
+      text-align: center;
+
+      background: white;
+
+      color: #e84393;
+
+      border-radius: 30px;
+
+      box-shadow: 0 25px 70px rgba(0, 0, 0, .3);
+
+      transition: .35s;
+    }
+
+
+    .popup.show {
+
+      transform:
+        translate(-50%, -50%)
+        scale(1);
+    }
+
+
+    .popup h2 {
+
+      font-size: 2rem;
+
+      margin-bottom: 12px;
+    }
+
+
+    .popup p {
+
+      line-height: 1.6;
+
+      color: #555;
+    }
+
+
+    .close {
+
+      margin-top: 20px;
+    }
+
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 600px) {
+
+      .card {
+
+        padding: 30px 18px;
+      }
+
+
+      .cake {
+
+        font-size: 60px;
+      }
+
+
+      .buttons {
+
+        gap: 9px;
+      }
+
+
+      .btn {
+
+        flex: 1 1 40%;
+      }
+
+    }
+
+
+    /* ================= REDUCED MOTION ================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+
+        animation-duration: .01ms !important;
+
+        animation-iteration-count: 1 !important;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- Falling 🎀 -->
+
+  <div id="ribbons"></div>
+
+
+  <!-- ================= BIRTHDAY CARD ================= -->
+
+  <main class="card">
+
+
+    <div class="cake" id="cake">
+
+      🎂
+
+    </div>
+
+
+    <h1>
+
+      Happy Birthday!
+
+    </h1>
+
+
+    <div class="name">
+
+      To: Justin Mary 💖
+
+    </div>
+
+
+    <p class="message" id="message">
+
+      Today is officially your day! 🥳
+
+      <br>
+
+      I wish for your success, health, fortune
+
+      and LOTS of happiness! ✨
+
+    </p>
+
+
+    <div class="buttons">
+
+
+      <button
+        class="btn"
+        id="confettiBtn"
+        type="button"
+      >
+
+        🎉 Confetti
+
+      </button>
+
+
+      <button
+        class="btn"
+        id="balloonBtn"
+        type="button"
+      >
+
+        🎈 Balloons
+
+      </button>
+
+
+      <button
+        class="btn"
+        id="messageBtn"
+        type="button"
+      >
+
+        💌 Sweet Message
+
+      </button>
+
+
+      <button
+        class="btn surprise"
+        id="surpriseBtn"
+        type="button"
+      >
+
+        🎁 Surprise!
+
+      </button>
+
+
+    </div>
+
+
+  </main>
+
+
+  <!-- ================= SURPRISE POPUP ================= -->
+
+  <section
+    class="popup"
+    id="popup"
+    aria-hidden="true"
+  >
+
+
+    <h2>
+
+      🎊 SURPRISE! 🎊
+
+    </h2>
+
+
+    <p>
+
+      You deserve all the happiness in the world! 💕
+
+      <br><br>
+
+      Keep smiling, keep dreaming,
+
+      and never stop being awesome! ✨
+
+      <br><br>
+
+      Kani ra akong gift kay na traffic si Santa HAHAHAHAHAH
+
+    </p>
+
+
+    <button
+      class="btn close"
+      id="closeBtn"
+      type="button"
+    >
+
+      Okay! 😄
+
+    </button>
+
+
+  </section>
+
+
+  <script>
+
+
+    /* ================= COLORS ================= */
+
+    const colors = [
+
+      "#ff1744",
+
+      "#ff69b4",
+
+      "#ff9ecf",
+
+      "#ffeb3b",
+
+      "#00e5ff",
+
+      "#e040fb",
+
+      "#ff9100",
+
+      "#ffffff"
+
+    ];
+
+
+    /* ================= FALLING 🎀 ================= */
+
+    function createRibbons() {
+
+      const container =
+        document.getElementById("ribbons");
+
+
+      for (let i = 0; i < 35; i++) {
+
+        const ribbon =
+          document.createElement("div");
+
+
+        ribbon.className = "ribbon";
+
+
+        /* Make it a 🎀 emoji */
+
+        ribbon.textContent = "🎀";
+
+
+        /* Random horizontal position */
+
+        ribbon.style.left =
+          Math.random() * 100 + "vw";
+
+
+        /* Random size */
+
+        ribbon.style.fontSize =
+          20 + Math.random() * 25 + "px";
+
+
+        /* Random falling speed */
+
+        ribbon.style.setProperty(
+          "--duration",
+          5 + Math.random() * 7 + "s"
+        );
+
+
+        /* Random starting delay */
+
+        ribbon.style.setProperty(
+          "--delay",
+          -Math.random() * 10 + "s"
+        );
+
+
+        container.appendChild(ribbon);
+
+      }
+
+    }
+
+
+    /* ================= CONFETTI ================= */
+
+    function createConfetti(amount = 150) {
+
+
+      for (let i = 0; i < amount; i++) {
+
+
+        const piece =
+          document.createElement("div");
+
+
+        piece.className = "confetti";
+
+
+        /* Random position */
+
+        piece.style.left =
+          Math.random() * 100 + "vw";
+
+
+        /* Random color */
+
+        piece.style.background =
+          colors[
+            Math.floor(
+              Math.random() * colors.length
+            )
+          ];
+
+
+        /* Random width */
+
+        piece.style.width =
+          5 + Math.random() * 8 + "px";
+
+
+        /* Random height */
+
+        piece.style.height =
+          8 + Math.random() * 12 + "px";
+
+
+        /* Random shape */
+
+        piece.style.borderRadius =
+          Math.random() > .5
+            ? "50%"
+            : "2px";
+
+
+        /* Random falling speed */
+
+        piece.style.setProperty(
+          "--duration",
+          2 + Math.random() * 4 + "s"
+        );
+
+
+        document.body.appendChild(piece);
+
+
+        /* Remove after animation */
+
+        setTimeout(() => {
+
+          piece.remove();
+
+        }, 6500);
+
+      }
+
+    }
+
+
+    /* ================= BALLOONS ================= */
+
+    function createBalloon() {
+
+
+      const balloon =
+        document.createElement("div");
+
+
+      balloon.className = "balloon";
+
+
+      /* Random position */
+
+      balloon.style.left =
+        Math.random() * 90 + "vw";
+
+
+      /* Random color */
+
+      balloon.style.background =
+        colors[
+          Math.floor(
+            Math.random() * colors.length
+          )
+        ];
+
+
+      /* Random speed */
+
+      balloon.style.setProperty(
+        "--duration",
+        5 + Math.random() * 4 + "s"
+      );
+
+
+      /* Click balloon */
+
+      balloon.addEventListener(
+        "click",
+        () => {
+
+          createConfetti(25);
+
+          balloon.remove();
+
+        }
+      );
+
+
+      document.body.appendChild(balloon);
+
+
+      /* Remove balloon after 10 seconds */
+
+      setTimeout(() => {
+
+        balloon.remove();
+
+      }, 10000);
+
+    }
+
+
+    /* ================= SWEET MESSAGES ================= */
+
+    const messages = [
+
+      "You're not getting older... you're just becoming more legendary! 😎✨",
+
+      "Nahudtan kog quotes sa google, kani lang sa 🎂😂",
+
+      "You deserve a birthday as amazing as you are! 💖",
+
+      "Make a wish... but make it a BIG one! 🌟",
+
+      "Official birthday rule: you must have fun today! 🥳",
+
+      "Another year, another level unlocked! 🎮🎉",
+
+      "Angkol na AHAHAHAHAHAHAHAH! 😎🎈"
+
+    ];
+
+
+    let messageIndex = 0;
+
+
+    /* ================= CONFETTI BUTTON ================= */
+
+    document
+      .getElementById("confettiBtn")
+      .addEventListener(
+        "click",
+        () => {
+
+          createConfetti(220);
+
+        }
+      );
+
+
+    /* ================= BALLOON BUTTON ================= */
+
+    document
+      .getElementById("balloonBtn")
+      .addEventListener(
+        "click",
+        () => {
+
+
+          for (let i = 0; i < 8; i++) {
+
+
+            setTimeout(
+
+              createBalloon,
+
+              i * 150
+
+            );
+
+          }
+
+        }
+      );
+
+
+    /* ================= MESSAGE BUTTON ================= */
+
+    document
+      .getElementById("messageBtn")
+      .addEventListener(
+        "click",
+        () => {
+
+
+          const message =
+            document.getElementById("message");
+
+
+          messageIndex =
+            (messageIndex + 1)
+            % messages.length;
+
+
+          message.innerHTML =
+            messages[messageIndex];
+
+
+          createConfetti(35);
+
+        }
+      );
+
+
+    /* ================= SURPRISE BUTTON ================= */
+
+    const popup =
+      document.getElementById("popup");
+
+
+    document
+      .getElementById("surpriseBtn")
+      .addEventListener(
+        "click",
+        () => {
+
+
+          /* Show popup */
+
+          popup.classList.add("show");
+
+
+          popup.setAttribute(
+            "aria-hidden",
+            "false"
+          );
+
+
+          /* Big celebration */
+
+          createConfetti(300);
+
+
+          /* Create 10 balloons */
+
+          for (let i = 0; i < 10; i++) {
+
+
+            setTimeout(
+
+              createBalloon,
+
+              i * 100
+
+            );
+
+          }
+
+        }
+      );
+
+
+    /* ================= CLOSE POPUP ================= */
+
+    document
+      .getElementById("closeBtn")
+      .addEventListener(
+        "click",
+        () => {
+
+
+          popup.classList.remove("show");
+
+
+          popup.setAttribute(
+            "aria-hidden",
+            "true"
+          );
+
+        }
+      );
+
+
+    /* ================= CLICK THE CAKE ================= */
+
+    document
+      .getElementById("cake")
+      .addEventListener(
+        "click",
+        () => {
+
+
+          /* Create confetti */
+
+          createConfetti(80);
+
+
+          const cake =
+            document.getElementById("cake");
+
+
+          /* Change cake temporarily */
+
+          cake.textContent =
+            "🎂✨🎂";
+
+
+          /* Return to normal */
+
+          setTimeout(() => {
+
+            cake.textContent =
+              "🎂";
+
+          }, 800);
+
+        }
+      );
+
+
+    /* ================= START ================= */
+
+    /* Create falling 🎀 */
+
+    createRibbons();
+
+
+    /* Initial confetti */
+
+    setTimeout(() => {
+
+      createConfetti(120);
+
+    }, 500);
+
+
+  </script>
+
+
+</body>
+
+</html>
